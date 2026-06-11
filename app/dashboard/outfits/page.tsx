@@ -34,7 +34,7 @@ import {
 } from "@/components/ui/select"
 import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Camera, Upload, Plus, Trash2, Heart, Sparkles, RefreshCw, Check, X, ImageIcon } from "lucide-react"
+import { Camera, Upload, Plus, Trash2, Heart, Sparkles, RefreshCw, Check, X, Image as ImageIcon } from "lucide-react"
 import { useToast } from "@/hooks/use-toast"
 import { LeoraMascotEnhanced } from "@/components/mascot/leora-mascot-enhanced"
 import type { ClothingItem, GeneratedOutfit, ClothingCategory } from "@/types/clothing"
