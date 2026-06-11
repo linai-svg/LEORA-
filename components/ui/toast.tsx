@@ -151,6 +151,3 @@ export {
   ToastHeader,
   ToastFooter,
 }
-
-
-export { Toast, ToastClose, ToastDescription, ToastFooter, ToastHeader, ToastProvider, ToastTitle, ToastViewport }
