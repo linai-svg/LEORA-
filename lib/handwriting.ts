@@ -158,7 +158,6 @@ export async function recognizeTextLocal(imageData: string): Promise<string> {
     // Configure worker for better handwriting recognition
     await worker.setParameters({
       tessedit_char_whitelist: 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 .,!?-:;()\'"',
-      tessedit_pageseg_mode: '6', // Assume uniform block of text
     })
     
     console.log('[v0] Worker configured, starting recognition...')

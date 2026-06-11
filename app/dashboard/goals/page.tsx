@@ -99,6 +99,7 @@ export default function GoalsPage() {
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
       steps: [],
+      progress: 0,
     }
 
     setGoals([goal, ...goals])

@@ -147,28 +147,33 @@ export default function OutfitsPage() {
   // Create item with manual category
   const handleCategorySelected = async (category: ClothingCategory) => {
     if (!tempImage) return
-    
+
     setIsProcessing(true)
     setIsCategoryDialogOpen(false)
-    
+
     try {
       console.log('[v0] Creating item with manual category:', category)
-      
-      const newItem = {
-        id: Math.random().toString(),
+
+      const newItem: ClothingItem = {
+        id: crypto.randomUUID(),
+        userId: user?.id || 'guest',
         imageUrl: tempImage,
+        thumbnailUrl: tempImage,
         category: category,
-        dominantColor: '#FFFFFF',
+        categoryConfidence: 100,
+        dominantColor: '#808080',
+        colors: ['#808080'],
+        style: ['casual'],
+        season: ['spring', 'summer', 'autumn', 'winter'],
+        fabricWeight: 'medium',
         isFavorite: false,
         isActive: true,
-        updatedAt: new Date().toISOString(),
+        tags: [],
         wearCount: 0,
-        lastWorn: null,
-        name: 'New Item',
-        categoryConfidence: 100,
-        thumbnailUrl: tempImage
+        updatedAt: new Date().toISOString(),
+        createdAt: new Date().toISOString(),
       }
-      
+
       setClothingItems([...clothingItems, newItem])
       setTempImage(null)
       
@@ -232,18 +237,18 @@ export default function OutfitsPage() {
   }
   
   // Generate new outfit
-  const handleGenerateOutfit = (isRegenerate = false) => {
+  const handleGenerateOutfit = (isRegenerate: boolean = false) => {
     console.log('[v0] Starting outfit generation...', isRegenerate ? '(REGENERATE)' : '(NEW)')
-    
+
     if (isRegenerate) {
       setIsRegenerating(true)
     }
-    
+
     const activeItems = clothingItems.filter(item => item.isActive)
-    
+
     // VALIDATE with clear error messages
     const validation = validateWardrobe(activeItems)
-    
+
     if (!validation.isValid) {
       toast({
         title: "Cannot generate outfit",
@@ -253,20 +258,20 @@ export default function OutfitsPage() {
       setIsRegenerating(false)
       return
     }
-    
+
     console.log('[v0] Forced items:', forcedItemIds)
-    
+
     const outfit = generateOutfit(
       activeItems,
       new Date().toISOString(),
       user?.id || 'guest',
       forcedItemIds
     )
-    
+
     if (!outfit) {
       toast({
         title: "Generation failed",
-        description: forcedItemIds.length > 0 
+        description: forcedItemIds.length > 0
           ? "No compatible outfit found with selected items. Try different items."
           : "Could not create outfit. Please try again.",
         variant: "destructive"
@@ -274,14 +279,14 @@ export default function OutfitsPage() {
       setIsRegenerating(false)
       return
     }
-    
+
     console.log('[v0] Outfit generated:', outfit)
-    
+
     // Small delay for regenerate to show loading state
     setTimeout(() => {
       setCurrentOutfit(outfit)
       setActiveTab('generator')
-      
+
       // Generate Leora feedback
       const weather = getMockWeather(new Date().toISOString())
       console.log('[v0] Weather data:', weather)
@@ -289,7 +294,7 @@ export default function OutfitsPage() {
       console.log('[v0] Leora feedback:', feedback)
       setLeoraMessage(feedback)
       setTimeout(() => setLeoraMessage(null), 10000)
-      
+
       setIsRegenerating(false)
     }, isRegenerate ? 800 : 0)
   }
@@ -518,8 +523,8 @@ export default function OutfitsPage() {
           </Card>
           <Card className="bg-white shadow-sm border-0">
             <CardContent className="pt-6">
-              <Button 
-                onClick={handleGenerateOutfit}
+              <Button
+                onClick={() => handleGenerateOutfit(false)}
                 className="w-full"
                 disabled={clothingItems.length < 3}
               >

@@ -131,7 +131,8 @@ export default function PhotoDumpPage() {
       userId: user.id,
       username: user.email?.split('@')[0] || user.id,
       sharingMode,
-      reactions: []
+      reactions: [],
+      likes: []
     }
 
     setPhotos([newPhoto, ...photos])

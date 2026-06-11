@@ -153,6 +153,8 @@ const StudyTracker = () => {
       thumbnail: "",
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
+      lastAccessedAt: new Date().toISOString(),
+      tags: [],
     }
 
     setStudyPages([...studyPages, page])

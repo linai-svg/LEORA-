@@ -90,6 +90,13 @@ export interface Note {
 }
 
 // Goals types
+export interface GoalStep {
+  id: string
+  title: string
+  completed: boolean
+  completedAt?: string
+}
+
 export interface Goal {
   id: string
   userId: string
@@ -106,6 +113,8 @@ export interface Goal {
   archived: boolean
   createdAt: string
   updatedAt: string
+  progress: number
+  steps: GoalStep[]
 }
 
 // Mood types

@@ -1,9 +1,7 @@
 interface MoodEntry {
-  id: string
-  mood: "great" | "good" | "okay" | "bad" | "terrible"
-  note: string
   date: string
-  createdAt: string
+  mood: "great" | "good" | "okay" | "bad" | "terrible"
+  note?: string
 }
 
 /**
@@ -13,7 +11,7 @@ export function calculateStreak(entries: MoodEntry[]): number {
   if (entries.length === 0) return 0
 
   // Sort entries by date descending (most recent first)
-  const sortedEntries = [...entries].sort((a, b) => 
+  const sortedEntries = [...entries].sort((a, b) =>
     new Date(b.date).getTime() - new Date(a.date).getTime()
   )
 
@@ -24,9 +22,9 @@ export function calculateStreak(entries: MoodEntry[]): number {
   // Check if there's an entry for today or yesterday to start the streak
   const latestEntryDate = new Date(sortedEntries[0].date)
   latestEntryDate.setHours(0, 0, 0, 0)
-  
+
   const daysDiff = Math.floor((today.getTime() - latestEntryDate.getTime()) / (1000 * 60 * 60 * 24))
-  
+
   if (daysDiff > 1) {
     // Streak is broken if no entry today or yesterday
     return 0
@@ -50,13 +48,13 @@ export function calculateStreak(entries: MoodEntry[]): number {
 export function getLast7Days(): string[] {
   const days: string[] = []
   const today = new Date()
-  
+
   for (let i = 6; i >= 0; i--) {
     const date = new Date(today)
     date.setDate(today.getDate() - i)
     date.setHours(0, 0, 0, 0)
     days.push(date.toISOString().split('T')[0])
   }
-  
+
   return days
 }

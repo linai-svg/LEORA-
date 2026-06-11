@@ -78,24 +78,18 @@ export default function HomePage() {
 
   const handleGenerateOutfit = () => {
     const validation = validateWardrobe(clothingItems)
-    
+
     if (!validation.isValid) {
       toast({
         title: "Incomplete wardrobe",
-        description: validation.message,
+        description: validation.errorMessage,
         variant: "destructive",
       })
       return
     }
 
-    const weather = {
-      temp: 20,
-      condition: "sunny" as const,
-      precipitation: 0,
-    }
+    const outfit = generateOutfit(clothingItems, new Date().toISOString(), user?.id || "guest")
 
-    const outfit = generateOutfit(clothingItems, weather, "casual")
-    
     if (outfit) {
       toast({
         title: "Outfit generated!",
