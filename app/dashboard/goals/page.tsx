@@ -38,7 +38,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog"
-import { Plus, Target, Trophy, Trash2, CheckCircle2, Edit, Archive, BookOpen, Heart, User, Sparkles, Calendar } from "lucide-react"
+import { Plus, Target, Trophy, Trash2, CircleCheck as CheckCircle2, CreditCard as Edit, Archive, BookOpen, Heart, User, Sparkles, Calendar } from "lucide-react"
 import { useToast } from "@/hooks/use-toast"
 import type { Goal, GoalStep } from "@/types"
 import { getLeoraGoalsMessage } from "@/lib/leora-section-messages"
